@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deep Blue Guardian - Backend Viewer</title>
+  <script>
+    // Fonction pour récupérer et afficher le niveau de pollution
+    async function getPollutionLevel() {
+      const response = await fetch('http://127.0.0.1:5000/pollution');
+      const data = await response.json();
+      document.getElementById('pollutionLevel').innerText = data.pollutionLevel;
+    }
+
+    // Fonction pour mettre à jour le niveau de pollution
+    async function updatePollution(change) {
+      const response = await fetch('http://127.0.0.1:5000/update-pollution', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ change }),
+      });
+      const data = await response.json();
+      document.getElementById('pollutionLevel').innerText = data.newPollutionLevel;
+    }
+
+    // Fonction pour obtenir la difficulté
+    async function getDifficulty() {
+      const response = await fetch('http://127.0.0.1:5000/difficulty');
+      const data = await response.json();
+      document.getElementById('difficulty').innerText = data.difficulty;
+    }
+
+    // Fonction pour récupérer un conseil éducatif
+    async function getEducationalTip() {
+      const response = await fetch('http://127.0.0.1:5000/educational');
+      const data = await response.json();
+      document.getElementById('educationalTip').innerText = data.tip;
+    }
+
+    // Fonction pour générer un défi
+    async function generateChallenge() {
+      const response = await fetch('http://127.0.0.1:5000/generate-challenge');
+      const data = await response.json();
+      document.getElementById('challenge').innerText = data.challenge;
+      document.getElementById('event').innerText = data.event;
+    }
+
+    // Fonction pour récupérer l'état du joueur
+    async function getPlayerState() {
+      const response = await fetch('http://127.0.0.1:5000/player-state');
+      const data = await response.json();
+      document.getElementById('playerScore').innerText = data.score;
+      document.getElementById('playerSpeed').innerText = data.collection_speed;
+    }
+
+    // Appeler les fonctions lors du chargement de la page
+    window.onload = function () {
+      getPollutionLevel();
+      getDifficulty();
+      getEducationalTip();
+      getPlayerState();
+    };
+  </script>
+</head>
+<body>
+  <h1>Deep Blue Guardian - Backend Viewer</h1>
+
+  <section>
+    <h2>Niveau de Pollution</h2>
+    <p id="pollutionLevel">Loading...</p>
+    <button onclick="updatePollution(10)">Augmenter la pollution (+10)</button>
+    <button onclick="updatePollution(-10)">Réduire la pollution (-10)</button>
+  </section>
+
+  <section>
+    <h2>Difficulté</h2>
+    <p id="difficulty">Loading...</p>
+    <button onclick="getDifficulty()">Obtenir la Difficulté</button>
+  </section>
+
+  <section>
+    <h2>Conseil Éducatif</h2>
+    <p id="educationalTip">Loading...</p>
+    <button onclick="getEducationalTip()">Obtenir un Conseil</button>
+  </section>
+
+  <section>
+    <h2>Défi et Événement</h2>
+    <p><strong>Défi :</strong> <span id="challenge">Loading...</span></p>
+    <p><strong>Événement :</strong> <span id="event">Loading...</span></p>
+    <button onclick="generateChallenge()">Générer un Défi</button>
+  </section>
+
+  <section>
+    <h2>État du Joueur</h2>
+    <p><strong>Score :</strong> <span id="playerScore">Loading...</span></p>
+    <p><strong>Vitesse de Collecte :</strong> <span id="playerSpeed">Loading...</span></p>
+    <button onclick="getPlayerState()">Mettre à Jour l'État</button>
+  </section>
+</body>
+</html

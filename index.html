@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeu d'Attrape - Océan</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Écran principal -->
+  <div id="mainScreen" class="main-screen">
+    <h1>Deep Blue Guardian</h1>
+    <button id="startButton">Démarrer le Jeu</button>
+  </div>
+
+  <!-- Canvas pour le jeu -->
+  <canvas id="gameCanvas" style="display: none;"></canvas>
+  
+  <!-- Tableau de score -->
+  <div class="score-board" style="display: none;">
+    Score : <span id="score">0</span> | Temps : <span id="time">60</span> sec
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
